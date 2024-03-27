@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://duj5kvwuyxu1c"]
+
+[ext_resource type="Script" path="res://ui/crafting/scripts/RecipeDisplay.cs" id="1_mtwtb"]
+
+[node name="RecipeItem" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_mtwtb")
+
+[connection signal="pressed" from="." to="." method="OnRecipePressed"]

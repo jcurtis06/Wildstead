@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Tool" load_steps=3 format=3 uid="uid://brc8b2n14w0nk"]
+
+[ext_resource type="Script" path="res://data/item/scripts/Tool.cs" id="1_0tecj"]
+[ext_resource type="Texture2D" uid="uid://nqre0wbxybnf" path="res://assets/items/tools/wood_axe.png" id="1_dv3dt"]
+
+[resource]
+script = ExtResource("1_0tecj")
+Strength = 0
+Speed = 1.0
+Power = 1.0
+Name = "Wooden Axe"
+Icon = ExtResource("1_dv3dt")
+Count = 1
+Stackable = false

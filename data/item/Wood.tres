@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dlvhn8s3218uj"]
+
+[ext_resource type="Script" path="res://data/item/scripts/Item.cs" id="1_aaxa2"]
+[ext_resource type="Texture2D" uid="uid://cccpnvqrc1tcp" path="res://assets/items/wood.png" id="1_lp0vl"]
+
+[resource]
+script = ExtResource("1_aaxa2")
+Name = "Wood"
+Icon = ExtResource("1_lp0vl")
+Count = 5
+Stackable = true

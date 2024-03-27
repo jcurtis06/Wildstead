@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bo2mciokx6tai"]
+
+[ext_resource type="Texture2D" uid="uid://ctl6bojw4jaeg" path="res://assets/items/stick.png" id="1_fp144"]
+[ext_resource type="Script" path="res://data/item/scripts/Item.cs" id="1_gkatc"]
+
+[resource]
+script = ExtResource("1_gkatc")
+Name = "Stick"
+Icon = ExtResource("1_fp144")
+Count = 1
+Stackable = true

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://bhtdn0kfwfe0"]
+
+[ext_resource type="Script" path="res://data/crafting/recipes/scripts/Recipe.cs" id="1_h5e05"]
+[ext_resource type="Resource" uid="uid://bukvibjtgyhba" path="res://data/item/WoodWall.tres" id="1_kifet"]
+[ext_resource type="Texture2D" uid="uid://cccpnvqrc1tcp" path="res://assets/items/wood.png" id="1_ovqe3"]
+[ext_resource type="Script" path="res://data/item/scripts/Item.cs" id="2_e6ma4"]
+
+[sub_resource type="Resource" id="Resource_1ksgg"]
+script = ExtResource("2_e6ma4")
+Name = "Wood"
+Icon = ExtResource("1_ovqe3")
+Count = 1
+Stackable = true
+
+[resource]
+script = ExtResource("1_h5e05")
+Result = ExtResource("1_kifet")
+Ingredients = Array[Object]([SubResource("Resource_1ksgg")])

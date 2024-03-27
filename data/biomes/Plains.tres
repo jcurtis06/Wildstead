@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=3 format=3 uid="uid://lxtbrijpmaql"]
+
+[ext_resource type="Resource" uid="uid://h71u1rqij4q8" path="res://data/biomes/plains/objects/oak.tres" id="1_fwlmt"]
+[ext_resource type="Script" path="res://data/biomes/scripts/Biome.cs" id="1_trqqi"]
+
+[resource]
+script = ExtResource("1_trqqi")
+Moisture = 2.08165e-12
+Temperature = 2.08165e-12
+Altitude = 0.3
+TerrainName = "Plains"
+TerrainIndex = 2
+Layer = 2
+Objects = Array[Object]([ExtResource("1_fwlmt")])

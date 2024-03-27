@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=8 format=3 uid="uid://d2kkftoryll0w"]
+
+[ext_resource type="Texture2D" uid="uid://cccpnvqrc1tcp" path="res://assets/items/wood.png" id="1_oy2t7"]
+[ext_resource type="Resource" uid="uid://brc8b2n14w0nk" path="res://data/item/WoodAxe.tres" id="1_u6t00"]
+[ext_resource type="Script" path="res://data/crafting/recipes/scripts/Recipe.cs" id="1_xwgsl"]
+[ext_resource type="Script" path="res://data/item/scripts/Item.cs" id="2_xvy6j"]
+[ext_resource type="Texture2D" uid="uid://ctl6bojw4jaeg" path="res://assets/items/stick.png" id="3_ng5js"]
+
+[sub_resource type="Resource" id="Resource_xll0h"]
+script = ExtResource("2_xvy6j")
+Name = "Wood"
+Icon = ExtResource("1_oy2t7")
+Count = 3
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_j80gu"]
+script = ExtResource("2_xvy6j")
+Name = "Stick"
+Icon = ExtResource("3_ng5js")
+Count = 2
+Stackable = true
+
+[resource]
+script = ExtResource("1_xwgsl")
+Result = ExtResource("1_u6t00")
+Ingredients = Array[Object]([SubResource("Resource_xll0h"), SubResource("Resource_j80gu")])

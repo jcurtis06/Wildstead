@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg43jglkv8wnl"]
+
+[ext_resource type="Script" path="res://ui/crafting/scripts/CraftingMenu.cs" id="1_rjlgr"]
+[ext_resource type="Resource" uid="uid://djlcdrk27fift" path="res://data/crafting/crafter/Workbench.tres" id="2_fcgo2"]
+[ext_resource type="PackedScene" uid="uid://duj5kvwuyxu1c" path="res://ui/crafting/recipe_item.tscn" id="3_mfonf"]
+
+[node name="CraftingMenu" type="PanelContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_rjlgr")
+Crafter = ExtResource("2_fcgo2")
+RecipeItem = ExtResource("3_mfonf")
+
+[node name="CraftingContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CraftingContainer"]
+layout_mode = 2
+text = "Crafting"
+
+[node name="HSeparator" type="HSeparator" parent="CraftingContainer"]
+layout_mode = 2
+
+[node name="RecipeContainer" type="VBoxContainer" parent="CraftingContainer"]
+layout_mode = 2

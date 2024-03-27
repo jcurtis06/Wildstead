@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpawnItem" load_steps=4 format=3 uid="uid://b6kqyr6j2n652"]
+
+[ext_resource type="PackedScene" uid="uid://ekjjxwobn4po" path="res://entities/gloomroot/gloomroot.tscn" id="1_q7qm6"]
+[ext_resource type="Script" path="res://data/item/scripts/SpawnItem.cs" id="1_shsw6"]
+[ext_resource type="Texture2D" uid="uid://ds3yhhtk3exp3" path="res://assets/items/strange_log.png" id="2_66tck"]
+
+[resource]
+script = ExtResource("1_shsw6")
+EntityScene = ExtResource("1_q7qm6")
+Name = "Strange Log"
+Icon = ExtResource("2_66tck")
+Count = 1
+Stackable = true

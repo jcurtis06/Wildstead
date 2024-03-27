@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bukvibjtgyhba"]
+
+[ext_resource type="Texture2D" uid="uid://b6421ace3i0o5" path="res://assets/items/wood_wall.png" id="1_e7hjs"]
+[ext_resource type="Script" path="res://data/item/scripts/Block.cs" id="1_ovc3q"]
+
+[resource]
+script = ExtResource("1_ovc3q")
+Material = 0
+TerrainIndex = 0
+Name = "Wood Wall"
+Icon = ExtResource("1_e7hjs")
+Count = 1
+Stackable = true

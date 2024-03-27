@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BiomeObject" load_steps=3 format=3 uid="uid://h71u1rqij4q8"]
+
+[ext_resource type="PackedScene" uid="uid://bnjr7fk3xcq0d" path="res://levels/objects/tree.tscn" id="1_jmibi"]
+[ext_resource type="Script" path="res://data/biomes/scripts/BiomeObject.cs" id="2_3gdfn"]
+
+[resource]
+script = ExtResource("2_3gdfn")
+Probability = 0.05
+Object = ExtResource("1_jmibi")

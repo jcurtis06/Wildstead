@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://doucrwx14f6n1"]
+
+[ext_resource type="Script" path="res://data/biomes/scripts/Biome.cs" id="1_8j5da"]
+
+[resource]
+script = ExtResource("1_8j5da")
+Moisture = 2.08165e-12
+Temperature = 2.08165e-12
+Altitude = 0.25
+TerrainName = "Sand"
+TerrainIndex = 1
+Layer = 1
