@@ -10,6 +10,7 @@ public partial class Entity : CharacterBody2D
 
     public void TakeDamage(float dmg)
     {
+        GD.Print(Name + " took " + dmg + " damage.");
         Health -= dmg;
 
         if (Health <= 0)

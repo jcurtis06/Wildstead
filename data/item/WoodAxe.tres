@@ -8,6 +8,7 @@ script = ExtResource("1_0tecj")
 Strength = 0
 Speed = 1.0
 Power = 1.0
+Damage = 5.0
 Name = "Wooden Axe"
 Icon = ExtResource("1_dv3dt")
 Count = 1

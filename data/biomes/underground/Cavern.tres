@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://8h2nkqwnxpqq"]
+
+[ext_resource type="Script" path="res://data/biomes/scripts/Biome.cs" id="1_mxttg"]
+
+[resource]
+script = ExtResource("1_mxttg")
+Moisture = -1.0
+Temperature = -1.0
+Altitude = -1.0
+TerrainName = "Biome"
+TerrainIndex = 0
+Layer = 0
+Objects = null

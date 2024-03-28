@@ -13,6 +13,12 @@ public partial class Inventory : Resource
     
     private static MovingItem _movingItem;
     
+    public void AddViewer(InventoryView viewer)
+    {
+        Viewers.Add(viewer);
+        viewer.TreeExited += () => Viewers.Remove(viewer);
+    }
+    
     public void MakeItemsUnique()
     {
         var newItems = new Array<Item>();
@@ -162,11 +168,11 @@ public partial class Inventory : Resource
         }
     }
 
-    private void UpdateViewers()
+private void UpdateViewers()
+{
+    foreach (var viewer in Viewers)
     {
-        foreach (var viewer in Viewers)
-        {
-            viewer.UpdateView();
-        }
+        viewer.UpdateView();
     }
+}
 }

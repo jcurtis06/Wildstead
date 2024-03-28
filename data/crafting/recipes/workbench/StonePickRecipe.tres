@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://cau6oymg4pjf8"]
+
+[ext_resource type="Texture2D" uid="uid://dr3q2hpfabjhy" path="res://assets/items/stone.png" id="1_cyx7x"]
+[ext_resource type="Script" path="res://data/item/scripts/Block.cs" id="2_emm4o"]
+[ext_resource type="Script" path="res://data/item/scripts/Item.cs" id="2_m1uh4"]
+[ext_resource type="Texture2D" uid="uid://ctl6bojw4jaeg" path="res://assets/items/stick.png" id="3_5p5t6"]
+[ext_resource type="Resource" uid="uid://bk4br5o773atv" path="res://data/item/tools/StonePick.tres" id="4_abfs8"]
+[ext_resource type="Script" path="res://data/crafting/recipes/scripts/Recipe.cs" id="5_lgflt"]
+
+[sub_resource type="Resource" id="Resource_641uv"]
+script = ExtResource("2_emm4o")
+Material = 1
+TerrainIndex = 0
+Hardness = 3.0
+Name = "Stone"
+Icon = ExtResource("1_cyx7x")
+Count = 3
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_kwhky"]
+script = ExtResource("2_m1uh4")
+Name = "Stick"
+Icon = ExtResource("3_5p5t6")
+Count = 2
+Stackable = true
+
+[resource]
+script = ExtResource("5_lgflt")
+Result = ExtResource("4_abfs8")
+Ingredients = Array[Object]([SubResource("Resource_641uv"), SubResource("Resource_kwhky")])

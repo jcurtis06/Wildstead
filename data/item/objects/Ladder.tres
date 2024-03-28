@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectItem" load_steps=4 format=3 uid="uid://cxet0b2yepr5y"]
+
+[ext_resource type="PackedScene" uid="uid://clgtvbg37b1qg" path="res://levels/objects/ladder.tscn" id="1_fwxin"]
+[ext_resource type="Texture2D" uid="uid://by744q8obfm78" path="res://assets/items/ladder.png" id="1_h1nwn"]
+[ext_resource type="Script" path="res://data/item/scripts/ObjectItem.cs" id="2_ql6ui"]
+
+[resource]
+script = ExtResource("2_ql6ui")
+Scene = ExtResource("1_fwxin")
+Name = "Ladder"
+Icon = ExtResource("1_h1nwn")
+Count = 1
+Stackable = true

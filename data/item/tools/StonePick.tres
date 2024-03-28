@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Tool" load_steps=3 format=3 uid="uid://bk4br5o773atv"]
+
+[ext_resource type="Script" path="res://data/item/scripts/Tool.cs" id="1_11ieb"]
+[ext_resource type="Texture2D" uid="uid://gg8uf5tivia7" path="res://assets/items/tools/stone_pick.png" id="1_cvltj"]
+
+[resource]
+script = ExtResource("1_11ieb")
+Strength = 1
+Speed = 1.0
+Power = 1.0
+Damage = 1.0
+Name = "Stone Pick"
+Icon = ExtResource("1_cvltj")
+Count = 1
+Stackable = false

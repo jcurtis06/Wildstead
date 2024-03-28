@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Tool" load_steps=3 format=3 uid="uid://23x5kmd1qvco"]
+
+[ext_resource type="Texture2D" uid="uid://y5eu6u1fcrg0" path="res://assets/items/tools/wood_pick.png" id="1_2wbtu"]
+[ext_resource type="Script" path="res://data/item/scripts/Tool.cs" id="2_qcj0y"]
+
+[resource]
+script = ExtResource("2_qcj0y")
+Strength = 0
+Speed = 1.0
+Power = 0.5
+Damage = 1.0
+Name = "Wood Pick"
+Icon = ExtResource("1_2wbtu")
+Count = 1
+Stackable = false

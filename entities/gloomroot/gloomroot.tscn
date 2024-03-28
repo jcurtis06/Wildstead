@@ -1,147 +1,46 @@
-[gd_scene load_steps=8 format=3 uid="uid://ekjjxwobn4po"]
+[gd_scene load_steps=7 format=3 uid="uid://ekjjxwobn4po"]
 
 [ext_resource type="Script" path="res://entities/gloomroot/scripts/Gloomroot.cs" id="1_3ps3g"]
 [ext_resource type="Texture2D" uid="uid://hx3gg76sbc8u" path="res://assets/entities/gloomroot.png" id="2_51slh"]
-[ext_resource type="Texture2D" uid="uid://ceijwc1wptvqp" path="res://assets/items/massive_club.png" id="3_gstvm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_at348"]
 size = Vector2(16, 16)
 
-[sub_resource type="Animation" id="Animation_uuqyh"]
-resource_name = "swing"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon/Display:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/Display:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5708]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/Display:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon/Display/RayCast2D:enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
+[sub_resource type="Curve" id="Curve_lnxn5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="Animation" id="Animation_jsnar"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon/Display:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/Display:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/Display:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon/Display/RayCast2D:enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+[sub_resource type="CurveTexture" id="CurveTexture_n5a6a"]
+curve = SubResource("Curve_lnxn5")
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3xcf"]
-_data = {
-"RESET": SubResource("Animation_jsnar"),
-"swing": SubResource("Animation_uuqyh")
-}
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0kpfh"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 24.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_n5a6a")
+color = Color(0.290196, 0.368627, 0.372549, 1)
 
-[node name="Gloomroot" type="CharacterBody2D" node_paths=PackedStringArray("WeaponAnimation", "WeaponContainer")]
+[node name="Gloomroot" type="CharacterBody2D" node_paths=PackedStringArray("StompParticles")]
+position = Vector2(1, 0)
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_3ps3g")
-WeaponAnimation = NodePath("Weapon/AnimationPlayer")
-WeaponContainer = NodePath("Weapon")
+StompParticles = NodePath("GPUParticles2D")
+Health = 5.0
+MaxHealth = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_51slh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_at348")
-disabled = true
 
-[node name="Weapon" type="Node2D" parent="."]
-
-[node name="Display" type="Sprite2D" parent="Weapon"]
-texture = ExtResource("3_gstvm")
-offset = Vector2(22, -21)
-
-[node name="RayCast2D" type="RayCast2D" parent="Weapon/Display"]
-rotation = -2.35619
-target_position = Vector2(2.08165e-12, 45)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_a3xcf")
-}
-
-[connection signal="animation_finished" from="Weapon/AnimationPlayer" to="." method="AnimationFinished"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 11)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_0kpfh")
+one_shot = true

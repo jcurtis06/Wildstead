@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public partial class Blocks : TileMap
 {
     private BetterTerrain _bt;
+    private int count = 0;
 
+    private Dictionary<Vector2I, Block> _blocks = new();
+    
     public override void _Ready()
     {
         _bt = new BetterTerrain(this);
@@ -12,7 +16,15 @@ public partial class Blocks : TileMap
 
     public void SetBlock(Vector2 pos, Block block)
     {
+        count += 1;
+        GD.Print("setting block ", count);
+        if (_bt == null)
+        {
+            _bt = new BetterTerrain(this);
+        }
+        
         var mapPos = LocalToMap(pos);
+        _blocks[mapPos] = block.Duplicate() as Block;
         _bt.SetCell(0, mapPos, block.TerrainIndex);
         _bt.UpdateTerrainCells(0, GetSurroundingCells(mapPos));
     }
@@ -34,18 +46,31 @@ public partial class Blocks : TileMap
         return MapToLocal(closest);
     }
 
-    public bool DamageBlock(Vector2 pos)
+    public Block? DamageBlock(Vector2 pos, Tool tool)
     {
         var mapPos = LocalToMap(pos);
         
         if (_bt.GetCell(0, mapPos) == -1)
         {
-            return false;
+            return null;
         }
         
-        _bt.SetCell(0, mapPos, -1);
-        _bt.UpdateTerrainCells(0, GetSurroundingCells(mapPos));
+        if (!_blocks.ContainsKey(mapPos))
+        {
+            return null;
+        }
+        
+        var block = _blocks[mapPos];
+        var broke = block.Damage(tool);
 
-        return true;
+        if (broke)
+        {
+            _bt.SetCell(0, mapPos, -1);
+            _bt.UpdateTerrainCells(0, GetSurroundingCells(mapPos));
+            _blocks.Remove(mapPos);
+            return block;
+        }
+
+        return null;
     }
 }

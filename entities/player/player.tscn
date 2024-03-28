@@ -5,14 +5,15 @@
 [ext_resource type="Resource" uid="uid://bo2mciokx6tai" path="res://data/item/Stick.tres" id="3_mhrj7"]
 [ext_resource type="PackedScene" uid="uid://cmjd0rlv3ep4w" path="res://ui/inventory/inventory_view.tscn" id="3_nyxe5"]
 [ext_resource type="Script" path="res://entities/player/scripts/Camera.cs" id="4_1xkxa"]
+[ext_resource type="Texture2D" uid="uid://ctl6bojw4jaeg" path="res://assets/items/stick.png" id="4_5eodh"]
 [ext_resource type="PackedScene" uid="uid://x1k61t3wku20" path="res://ui/inventory/slot_view.tscn" id="4_ab4rr"]
 [ext_resource type="PackedScene" uid="uid://cg43jglkv8wnl" path="res://ui/crafting/crafting_menu.tscn" id="6_70kvr"]
 [ext_resource type="Texture2D" uid="uid://dfc3iof04hwud" path="res://assets/ui/cursor.png" id="8_kvdc2"]
 [ext_resource type="Texture2D" uid="uid://dc0ush8x7qums" path="res://assets/player/player.png" id="8_xj2ne"]
 [ext_resource type="Script" path="res://ui/inventory/scripts/HotBar.cs" id="8_xm0bj"]
-[ext_resource type="Script" path="res://ui/cursor/scripts/Cursor.cs" id="9_f5ewi"]
 [ext_resource type="AudioStream" uid="uid://bm0duffyj2ohu" path="res://assets/sound/footstep/grass_01.wav" id="9_k7ywv"]
 [ext_resource type="AudioStream" uid="uid://c7j1fvcwv14jt" path="res://assets/sound/punch/punch.wav" id="10_l8ig3"]
+[ext_resource type="Script" path="res://entities/player/scripts/BetterCursor.cs" id="15_n6h3s"]
 
 [sub_resource type="Animation" id="Animation_viqw5"]
 length = 0.001
@@ -39,6 +40,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:IsSwinging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_cbdsi"]
@@ -68,6 +81,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:IsSwinging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2owms"]
 _data = {
@@ -75,8 +100,8 @@ _data = {
 "swing": SubResource("Animation_cbdsi")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76uaq"]
-size = Vector2(8, 8)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpfb3"]
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_eey86"]
 length = 0.001
@@ -182,18 +207,27 @@ _data = {
 "walk": SubResource("Animation_3dlii")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6uol8"]
-radius = 8.0
-
 [node name="Player" type="CharacterBody2D" groups=["Entity", "Player"]]
 script = ExtResource("1_f6c5d")
 Inventory = ExtResource("2_sri16")
 MainHand = ExtResource("3_mhrj7")
 
+[node name="Reach" type="RayCast2D" parent="."]
+target_position = Vector2(30, 2.08165e-12)
+script = ExtResource("15_n6h3s")
+
+[node name="CursorSprite" type="Sprite2D" parent="Reach"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_kvdc2")
+centered = false
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 18, 18)
+
 [node name="Swing" type="Node2D" parent="."]
 
 [node name="Display" type="Sprite2D" parent="Swing"]
 z_index = 10
+texture = ExtResource("4_5eodh")
 offset = Vector2(8, -8)
 
 [node name="SwingAnimation" type="AnimationPlayer" parent="Swing"]
@@ -202,11 +236,17 @@ libraries = {
 }
 speed_scale = 3.0
 
+[node name="WeaponRay" type="RayCast2D" parent="Swing"]
+rotation = -2.35619
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 3
+collide_with_areas = true
+
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("8_xj2ne")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_76uaq")
+shape = SubResource("CircleShape2D_xpfb3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(7.5, 7.5)
@@ -230,58 +270,65 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryView" parent="HUD/Inventory" node_paths=PackedStringArray("player") instance=ExtResource("3_nyxe5")]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Inventory"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -8.0
-offset_right = 16.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_right = 152.0
+offset_bottom = 204.0
+
+[node name="InventoryView" parent="HUD/Inventory/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("3_nyxe5")]
+layout_mode = 2
 columns = 3
 script = ExtResource("8_xm0bj")
-player = NodePath("../../..")
+player = NodePath("../../../..")
 Inventory = ExtResource("2_sri16")
 
-[node name="SlotView" parent="HUD/Inventory/InventoryView" instance=ExtResource("4_ab4rr")]
+[node name="SlotView" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
 layout_mode = 2
 
-[node name="SlotView2" parent="HUD/Inventory/InventoryView" instance=ExtResource("4_ab4rr")]
+[node name="SlotView2" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
 layout_mode = 2
 
-[node name="SlotView3" parent="HUD/Inventory/InventoryView" instance=ExtResource("4_ab4rr")]
+[node name="SlotView3" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
 layout_mode = 2
 
-[node name="CraftingMenu" parent="HUD" instance=ExtResource("6_70kvr")]
+[node name="SlotView4" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView5" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView6" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView7" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView8" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView9" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView10" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView11" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="SlotView12" parent="HUD/Inventory/VBoxContainer/InventoryView" instance=ExtResource("4_ab4rr")]
+layout_mode = 2
+
+[node name="ExpandedInventory" type="VBoxContainer" parent="HUD/Inventory/VBoxContainer"]
+layout_mode = 2
+
+[node name="CraftingMenu" parent="HUD/Inventory/VBoxContainer/ExpandedInventory" instance=ExtResource("6_70kvr")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 ViewerInventory = ExtResource("2_sri16")
-
-[node name="Cursor" type="Area2D" parent="." node_paths=PackedStringArray("AttackSound", "Camera", "SwingNode")]
-script = ExtResource("9_f5ewi")
-AttackSound = NodePath("../Punch")
-Camera = NodePath("../Camera2D")
-SwingNode = NodePath("../Swing")
-
-[node name="CursorSprite" type="Sprite2D" parent="Cursor"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_kvdc2")
-region_enabled = true
-region_rect = Rect2(2.08165e-12, 2.08165e-12, 18, 18)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
-shape = SubResource("CircleShape2D_6uol8")
 
 [node name="Footstep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_k7ywv")
 
 [node name="Punch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_l8ig3")
-
-[connection signal="area_entered" from="Cursor" to="Cursor" method="Area2DEntered"]
-[connection signal="area_exited" from="Cursor" to="Cursor" method="Area2DExited"]
-[connection signal="body_entered" from="Cursor" to="Cursor" method="NodeEntered"]
-[connection signal="body_exited" from="Cursor" to="Cursor" method="NodeExited"]

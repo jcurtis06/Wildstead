@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="Crafter" load_steps=5 format=3 uid="uid://djlcdrk27fift"]
+[gd_resource type="Resource" script_class="Crafter" load_steps=8 format=3 uid="uid://djlcdrk27fift"]
 
 [ext_resource type="Resource" uid="uid://mo0qsvlqhb01" path="res://data/crafting/recipes/workbench/Stick.tres" id="1_8knld"]
 [ext_resource type="Script" path="res://data/crafting/crafter/scripts/Crafter.cs" id="1_on1f0"]
 [ext_resource type="Resource" uid="uid://d2kkftoryll0w" path="res://data/crafting/recipes/workbench/WoodAxeRecipe.tres" id="2_se1tb"]
 [ext_resource type="Resource" uid="uid://bhtdn0kfwfe0" path="res://data/crafting/recipes/workbench/WoodWallRecipe.tres" id="3_kg2cr"]
+[ext_resource type="Resource" uid="uid://brv3uoabje1a3" path="res://data/crafting/recipes/workbench/LadderRecipe.tres" id="4_4kqcw"]
+[ext_resource type="Resource" uid="uid://c0dalh5ndqnlk" path="res://data/crafting/recipes/workbench/WoodPickRecipe.tres" id="5_eugo7"]
+[ext_resource type="Resource" uid="uid://cau6oymg4pjf8" path="res://data/crafting/recipes/workbench/StonePickRecipe.tres" id="6_xxhx5"]
 
 [resource]
 script = ExtResource("1_on1f0")
 Name = "Workbench"
-Recipes = Array[Object]([ExtResource("1_8knld"), ExtResource("2_se1tb"), ExtResource("3_kg2cr")])
+Recipes = Array[Object]([ExtResource("1_8knld"), ExtResource("2_se1tb"), ExtResource("3_kg2cr"), ExtResource("4_4kqcw"), ExtResource("5_eugo7"), ExtResource("6_xxhx5")])

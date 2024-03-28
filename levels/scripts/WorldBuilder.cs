@@ -31,7 +31,7 @@ public partial class WorldBuilder : TileMap
 		
 		GenerateChunk(Vector2I.Zero);
 	}
-
+	
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("regen_world"))

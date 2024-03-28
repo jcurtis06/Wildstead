@@ -9,17 +9,32 @@ public partial class PlayerController : Entity
 	[Export] public Item MainHand;
 	[Export] public Blocks Blocks;
 
+	[Export] public bool IsSwinging;
+
 	private AnimationPlayer _animationPlayer;
+	private AnimationPlayer _swingAnimation;
 	private Sprite2D _sprite;
     private AudioStreamPlayer _footstep;
+    private AudioStreamPlayer _punch;
     private Sprite2D _swingDisplay;
+    private RayCast2D _swingRay;
+    private Node2D _swing;
+    private Camera _camera;
     
 	public override void _Ready()
 	{
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite");
+		
 		_footstep = GetNode<AudioStreamPlayer>("Footstep");
+		_punch = GetNode<AudioStreamPlayer>("Punch");
+		
+		_swing = GetNode<Node2D>("Swing");
 		_swingDisplay = GetNode<Sprite2D>("Swing/Display");
+		_swingRay = GetNode<RayCast2D>("Swing/WeaponRay");
+		_swingAnimation = GetNode<AnimationPlayer>("Swing/SwingAnimation");
+		
+		_camera = GetNode<Camera>("Camera2D");
 		
 		SetMainHand(Inventory.Items[0]);
 	}
@@ -29,6 +44,14 @@ public partial class PlayerController : Entity
 		MainHand = item;
 		_swingDisplay.Texture = item?.Icon;
 		_swingDisplay.Hide();
+	}
+
+	public void Swing()
+	{
+		_swing.LookAt(GetGlobalMousePosition());
+		_camera.ApplyShake();
+		_swingAnimation.Play("swing");
+		_punch.Play();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -46,6 +69,27 @@ public partial class PlayerController : Entity
 				var consumable = (IConsumable)MainHand;
 				consumable.Consume(this);
 				Inventory.RemoveItem(MainHand);
+			}
+		}
+
+		if (IsSwinging)
+		{
+			if (_swingRay.IsColliding())
+			{
+				GD.Print("Ray colliding");
+				var entity = _swingRay.GetCollider();
+				if (entity is Entity)
+				{
+					if (MainHand is Tool)
+					{
+						var tool = (Tool)MainHand;
+						((Entity)entity).TakeDamage(tool.Damage);
+					}
+					else
+					{
+						((Entity)entity).TakeDamage(1);
+					}
+				}
 			}
 		}
 		

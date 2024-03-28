@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://brv3uoabje1a3"]
+
+[ext_resource type="Texture2D" uid="uid://ctl6bojw4jaeg" path="res://assets/items/stick.png" id="1_6vldp"]
+[ext_resource type="Script" path="res://data/crafting/recipes/scripts/Recipe.cs" id="1_c2xe8"]
+[ext_resource type="Script" path="res://data/item/scripts/Item.cs" id="2_hxh6r"]
+[ext_resource type="Resource" uid="uid://cxet0b2yepr5y" path="res://data/item/objects/Ladder.tres" id="3_dvo33"]
+
+[sub_resource type="Resource" id="Resource_l51e7"]
+script = ExtResource("2_hxh6r")
+Name = "Stick"
+Icon = ExtResource("1_6vldp")
+Count = 8
+Stackable = true
+
+[resource]
+script = ExtResource("1_c2xe8")
+Result = ExtResource("3_dvo33")
+Ingredients = Array[Object]([SubResource("Resource_l51e7")])

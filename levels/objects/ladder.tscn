@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://clgtvbg37b1qg"]
+
+[ext_resource type="Script" path="res://levels/objects/Ladder.cs" id="1_behpo"]
+[ext_resource type="Texture2D" uid="uid://cxhkerbwe7q1i" path="res://assets/objects/ladder.png" id="1_nfniw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfiic"]
+
+[node name="Ladder" type="Area2D"]
+script = ExtResource("1_behpo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xfiic")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nfniw")
+
+[connection signal="body_entered" from="." to="." method="HandleEnter"]
+[connection signal="body_exited" from="." to="." method="HandleExit"]

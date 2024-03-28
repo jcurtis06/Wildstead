@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bqjuv1qyxj63f"]
+
+[ext_resource type="Texture2D" uid="uid://dr3q2hpfabjhy" path="res://assets/items/stone.png" id="1_ejbaw"]
+[ext_resource type="Script" path="res://data/item/scripts/Block.cs" id="2_1ewi2"]
+
+[resource]
+script = ExtResource("2_1ewi2")
+Material = 1
+TerrainIndex = 0
+Hardness = 3.0
+Name = "Stone"
+Icon = ExtResource("1_ejbaw")
+Count = 1
+Stackable = true

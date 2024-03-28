@@ -7,4 +7,5 @@ public partial class Tool : Item
     [Export] public ItemMaterial Strength;
     [Export] public float Speed;
     [Export] public float Power;
+    [Export] public float Damage;
 }

@@ -1,70 +1,27 @@
 using Godot;
+using Wildstead.entities.gloomroot.scripts.states;
 using Wildstead.entities.scripts;
+using Wildstead.scripts.state;
 
 public partial class Gloomroot : Boss
 {
     [Export] public float Speed = 50;
-    [Export] public AnimationPlayer WeaponAnimation;
-    [Export] public Node2D WeaponContainer;
+    [Export] public GpuParticles2D StompParticles;
     
-    private GloomrootState _state = GloomrootState.Chase;
-    
+    public StateMachine<Gloomroot> StateMachine;
+
+    public override void _Ready()
+    {
+        StateMachine = new StateMachine<Gloomroot>(this);
+        StateMachine.TransitionTo(new GloomrootStompState());
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
-        
-        if (Summoner == null)
-        {
-            return;
-        }
-        
-        switch (_state)
-        {
-            case GloomrootState.Chase:
-                Chase();
-                break;
-            case GloomrootState.Flee:
-                break;
-            case GloomrootState.Swing:
-                Swing();
-                break;
-            case GloomrootState.Ranged:
-                break;
-        }
-    }
-    
-    private void Chase()
-    {
-        if (Position.DistanceTo(Summoner.Position) < 50)
-        {
-            _state = GloomrootState.Swing;
-            return;
-        }
-        
-        var direction = (Summoner.Position - Position).Normalized();
-        Velocity = direction * Speed;
-        MoveAndSlide();
-    }
 
-    private void Swing()
-    {
-        WeaponContainer.LookAt(Summoner.GlobalPosition);
-        WeaponAnimation.Play("swing");
+        if (Summoner == null) return;
+        
+        StateMachine.Process(delta);
     }
-
-    private void AnimationFinished(string animation)
-    {
-        if (animation == "swing")
-        {
-            _state = GloomrootState.Chase;
-        }
-    }
-}
-
-enum GloomrootState
-{
-    Chase,
-    Flee,
-    Swing,
-    Ranged,
 }

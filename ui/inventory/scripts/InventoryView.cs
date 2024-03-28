@@ -8,7 +8,7 @@ public partial class InventoryView : GridContainer
 	public override void _Ready()
 	{
 		Inventory.MakeItemsUnique();
-		Inventory.Viewers.Add(this);
+		Inventory.AddViewer(this);
 		UpdateView();
 	}
 
