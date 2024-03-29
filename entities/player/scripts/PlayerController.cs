@@ -54,6 +54,11 @@ public partial class PlayerController : Entity
 		_punch.Play();
 	}
 
+	public override void _Process(double delta)
+	{
+		GD.Print(GlobalPosition);
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Input.IsActionJustPressed("interact"))

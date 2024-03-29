@@ -5,6 +5,7 @@
 [node name="RecipeItem" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
+theme_override_font_sizes/font_size = 4
 script = ExtResource("1_mtwtb")
 
 [connection signal="pressed" from="." to="." method="OnRecipePressed"]

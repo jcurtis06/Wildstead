@@ -9,6 +9,11 @@ public partial class Camera : Camera2D
 	private RandomNumberGenerator _rng = new();
 	private float _shakeStrength = 0.0f;
 
+	public override void _Ready()
+	{
+		Globals.Camera = this;
+	}
+
 	public void ApplyShake()
 	{
 		_shakeStrength = RandomStrength;
@@ -21,8 +26,10 @@ public partial class Camera : Camera2D
 			_shakeStrength = Mathf.Lerp(_shakeStrength, 0, ShakeFade * (float)delta);
 			Offset = RandomOffset();
 		}
+		
+		GD.Print(GlobalPosition);
 	}
-	
+
 	private Vector2 RandomOffset()
 	{
 		return new Vector2(

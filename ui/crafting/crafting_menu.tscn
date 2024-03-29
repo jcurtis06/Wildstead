@@ -16,6 +16,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CraftingContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 4
 text = "Crafting"
 
 [node name="HSeparator" type="HSeparator" parent="CraftingContainer"]
@@ -23,3 +24,7 @@ layout_mode = 2
 
 [node name="RecipeContainer" type="VBoxContainer" parent="CraftingContainer"]
 layout_mode = 2
+
+[node name="RecipeItem" parent="CraftingContainer/RecipeContainer" instance=ExtResource("3_mfonf")]
+layout_mode = 2
+text = "DDDDDDDDD"
