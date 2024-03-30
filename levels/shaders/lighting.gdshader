@@ -24,7 +24,7 @@ void fragment() {
 	vec2 frag_position = world_position;
 	float m_value = 0.0;
 	vec4 light_color = default_light_color;
-	
+
 	for (int i = 0; i < n_lights; i++) {
 		vec4 texel = texelFetch(light_data, ivec2(i, 0), 0);
 		float radius = texel.a;
@@ -32,7 +32,7 @@ void fragment() {
 		float dist = distance(texel.xy, frag_position);
 		dist = min(dist / radius, 1.0);
 		dist = max((dist * offset_modifier) - (offset_modifier - 1.0), 0.0);
-		
+
 		float value = 0.0;
 		if(will_smooth_shade) {
 			value = (1.0 - dist) * strength * light_strength_modifier;
@@ -59,14 +59,14 @@ void fragment() {
 			light_color = texelFetch(light_data, ivec2(i, 1), 0);
 		}
 	}
-	
+
 	// mix darkness with light based on light level
 	vec4 ambient_color = mix(dark_color, light_color, m_value);
 	// apply global light level
 	ambient_color.a *= 1.0 - light_level;
 	// get screen color for this pixel
 	vec4 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV);
-	
+
 	// apply multiply blend mode
 	COLOR = screen_color * ambient_color;
 }

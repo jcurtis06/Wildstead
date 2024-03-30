@@ -1,11 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://duj5kvwuyxu1c"]
+[gd_scene load_steps=4 format=3 uid="uid://duj5kvwuyxu1c"]
 
+[ext_resource type="FontFile" uid="uid://ci6mqc8y0v50o" path="res://assets/ui/m3x6.ttf" id="1_8lry1"]
 [ext_resource type="Script" path="res://ui/crafting/scripts/RecipeDisplay.cs" id="1_mtwtb"]
 
+[sub_resource type="FontVariation" id="FontVariation_xog7c"]
+base_font = ExtResource("1_8lry1")
+spacing_top = -8
+spacing_bottom = -8
+
 [node name="RecipeItem" type="Button"]
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_font_sizes/font_size = 4
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+offset_right = 50.0
+offset_bottom = 11.0
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_xog7c")
+theme_override_font_sizes/font_size = 16
+text = "PlaceHolder"
 script = ExtResource("1_mtwtb")
 
 [connection signal="pressed" from="." to="." method="OnRecipePressed"]

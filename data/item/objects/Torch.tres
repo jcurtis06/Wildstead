@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectItem" load_steps=4 format=3 uid="uid://dno03svfry7tv"]
+
+[ext_resource type="Texture2D" uid="uid://c1sdthu5cs2fk" path="res://assets/objects/torch.png" id="1_6hhyy"]
+[ext_resource type="Script" path="res://data/item/scripts/ObjectItem.cs" id="1_sxl6f"]
+[ext_resource type="PackedScene" uid="uid://c7ueo6683fxap" path="res://levels/objects/torch.tscn" id="2_4kkj1"]
+
+[resource]
+script = ExtResource("1_sxl6f")
+Scene = ExtResource("2_4kkj1")
+Name = "Torch"
+Icon = ExtResource("1_6hhyy")
+Count = 1
+Stackable = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bn0tyxvdqr62"]
+[gd_scene load_steps=20 format=3 uid="uid://bn0tyxvdqr62"]
 
 [ext_resource type="Texture2D" uid="uid://b5wvs08kaydvh" path="res://assets/tilesets/ground/water.png" id="1_jaoib"]
 [ext_resource type="Script" path="res://levels/scripts/World.cs" id="1_nnwxi"]
@@ -12,9 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c1o3hg2inm6eg" path="res://assets/tilesets/blocks/wood_wall.png" id="9_bk6f3"]
 [ext_resource type="Script" path="res://levels/scripts/Blocks.cs" id="9_o5as5"]
 [ext_resource type="AudioStream" uid="uid://ta27l2uqhnv5" path="res://assets/music/daylight.ogg" id="9_w3gv6"]
-[ext_resource type="Shader" path="res://levels/shaders/lighting.gdshader" id="13_1oe4l"]
-[ext_resource type="Script" path="res://levels/scripts/Lighting.cs" id="13_t2jdv"]
-[ext_resource type="Script" path="res://components/light/Light.cs" id="15_xaxj6"]
+[ext_resource type="Script" path="res://entities/player/scripts/Camera.cs" id="11_6wy4j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_57t3d"]
 texture = ExtResource("1_jaoib")
@@ -1005,19 +1003,6 @@ metadata/_better_terrain = {
 "version": "0.2"
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lpwna"]
-shader = ExtResource("13_1oe4l")
-shader_parameter/global_transform = null
-shader_parameter/n_lights = 0
-shader_parameter/dark_color = Color(0.25, 0.0625, 0.25, 1)
-shader_parameter/default_light_color = null
-shader_parameter/light_level = 0.0
-shader_parameter/offset_modifier = 1.0
-shader_parameter/n_light_bands = 7
-shader_parameter/will_smooth_shade = false
-shader_parameter/band_decay_rate = 0.5
-shader_parameter/light_strength_modifier = 1.0
-
 [node name="World" type="Node2D"]
 script = ExtResource("1_nnwxi")
 
@@ -1033,25 +1018,15 @@ tile_set = SubResource("TileSet_decvf")
 format = 2
 script = ExtResource("9_o5as5")
 
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("11_6wy4j")
+Target = NodePath("../Player")
+RandomStrength = 1.0
+ShakeFade = 10.0
+
 [node name="Player" parent="." node_paths=PackedStringArray("Blocks", "World") instance=ExtResource("8_55iop")]
 Blocks = NodePath("../Blocks")
 World = NodePath("..")
 
-[node name="Light" type="Node2D" parent="Player" groups=["light"]]
-script = ExtResource("15_xaxj6")
-Radius = 50.0
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_w3gv6")
-
-[node name="Lighting" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="Lighting"]
-material = SubResource("ShaderMaterial_lpwna")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_t2jdv")

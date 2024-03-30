@@ -3,7 +3,7 @@ using Wildstead.entities.scripts;
 
 public partial class PlayerController : Entity
 {
-	[Export] public const float Speed = 50.0f;
+	[Export] public float Speed = 50.0f;
 	[Export] public Inventory Inventory;
 
 	[Export] public Item MainHand;
@@ -33,8 +33,8 @@ public partial class PlayerController : Entity
 		_swingDisplay = GetNode<Sprite2D>("Swing/Display");
 		_swingRay = GetNode<RayCast2D>("Swing/WeaponRay");
 		_swingAnimation = GetNode<AnimationPlayer>("Swing/SwingAnimation");
-		
-		_camera = GetNode<Camera>("Camera2D");
+
+		_camera = Globals.Camera;
 		
 		SetMainHand(Inventory.Items[0]);
 	}
@@ -54,13 +54,10 @@ public partial class PlayerController : Entity
 		_punch.Play();
 	}
 
-	public override void _Process(double delta)
-	{
-		GD.Print(GlobalPosition);
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
+		GlobalPosition = GlobalPosition.Round();
+		
 		if (Input.IsActionJustPressed("interact"))
 		{
 			if (MainHand is Block)
@@ -105,7 +102,7 @@ public partial class PlayerController : Entity
 
 		Velocity = velocity;
 		MoveAndSlide();
-		Animate();
+		// Animate();
 	}
 
 	private void Animate()

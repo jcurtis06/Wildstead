@@ -3,6 +3,7 @@ using System;
 
 public partial class Camera : Camera2D
 {
+	[Export] public Node2D Target;
 	[Export] public float RandomStrength = 30.0f;
 	[Export] public float ShakeFade = 5.0f;
 
@@ -21,13 +22,16 @@ public partial class Camera : Camera2D
 
 	public override void _Process(double delta)
 	{
+		var pos = GlobalPosition;
+		pos.X += (Target.GlobalPosition.X - pos.X) * 0.1f;
+		pos.Y += (Target.GlobalPosition.Y - pos.Y) * 0.1f;
+		GlobalPosition = pos.Round();
+		
 		if (_shakeStrength > 0)
 		{
 			_shakeStrength = Mathf.Lerp(_shakeStrength, 0, ShakeFade * (float)delta);
 			Offset = RandomOffset();
 		}
-		
-		GD.Print(GlobalPosition);
 	}
 
 	private Vector2 RandomOffset()

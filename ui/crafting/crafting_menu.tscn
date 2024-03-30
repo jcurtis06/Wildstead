@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg43jglkv8wnl"]
+[gd_scene load_steps=6 format=3 uid="uid://cg43jglkv8wnl"]
 
 [ext_resource type="Script" path="res://ui/crafting/scripts/CraftingMenu.cs" id="1_rjlgr"]
 [ext_resource type="Resource" uid="uid://djlcdrk27fift" path="res://data/crafting/crafter/Workbench.tres" id="2_fcgo2"]
 [ext_resource type="PackedScene" uid="uid://duj5kvwuyxu1c" path="res://ui/crafting/recipe_item.tscn" id="3_mfonf"]
+[ext_resource type="FontFile" uid="uid://ci6mqc8y0v50o" path="res://assets/ui/m3x6.ttf" id="4_v1uqv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6wyi5"]
+font = ExtResource("4_v1uqv")
 
 [node name="CraftingMenu" type="PanelContainer"]
 size_flags_horizontal = 3
@@ -13,18 +17,14 @@ RecipeItem = ExtResource("3_mfonf")
 
 [node name="CraftingContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="CraftingContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 4
 text = "Crafting"
-
-[node name="HSeparator" type="HSeparator" parent="CraftingContainer"]
-layout_mode = 2
+label_settings = SubResource("LabelSettings_6wyi5")
 
 [node name="RecipeContainer" type="VBoxContainer" parent="CraftingContainer"]
 layout_mode = 2
-
-[node name="RecipeItem" parent="CraftingContainer/RecipeContainer" instance=ExtResource("3_mfonf")]
-layout_mode = 2
-text = "DDDDDDDDD"
+theme_override_constants/separation = 0

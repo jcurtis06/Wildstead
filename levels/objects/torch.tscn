@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ueo6683fxap"]
+
+[ext_resource type="Texture2D" uid="uid://c1sdthu5cs2fk" path="res://assets/objects/torch.png" id="1_vrum4"]
+[ext_resource type="Script" path="res://levels/objects/Torch.cs" id="2_c0hss"]
+
+[node name="Torch" type="Sprite2D" groups=["light"]]
+texture = ExtResource("1_vrum4")
+script = ExtResource("2_c0hss")
+Radius = 70.0
